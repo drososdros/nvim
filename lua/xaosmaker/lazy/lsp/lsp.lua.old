@@ -1,0 +1,199 @@
+return {
+  "neovim/nvim-lspconfig",
+  dependencies = {
+    "williamboman/mason.nvim",
+    "j-hui/fidget.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-path",
+    "hrsh7th/cmp-cmdline",
+    "hrsh7th/nvim-cmp",
+    "L3MON4D3/LuaSnip",
+    "saadparwaiz1/cmp_luasnip",
+    "rafamadriz/friendly-snippets",
+  },
+  config = function()
+    local cmp = require("cmp")
+    local cmp_lsp = require("cmp_nvim_lsp")
+    local luasnip = require("luasnip")
+    local capabilities = vim.tbl_deep_extend(
+      "force",
+      {},
+      vim.lsp.protocol.make_client_capabilities(),
+      cmp_lsp.default_capabilities()
+
+    )
+    require("luasnip/loaders/from_vscode").lazy_load()
+    require("fidget").setup({})
+    require("mason").setup()
+    require("mason-lspconfig").setup({
+      ensure_installed = {
+        "lua_ls",
+        "cssls",
+        "dockerls",
+        "html",
+        "tsserver",
+        "pyright",
+        "bashls",
+        "jsonls",
+        "yamlls",
+        "tailwindcss",
+        "bashls",
+        "docker_compose_language_service",
+        "eslint",
+        -- "nginx_language_server",
+        "pylsp",
+        "hydra_lsp",
+      },
+      handlers = {
+        function(server_name) -- default handler (optional)
+          require("lspconfig")[server_name].setup({
+            capabilities = capabilities,
+          })
+        end,
+
+        ["lua_ls"] = function()
+          local lspconfig = require("lspconfig")
+          lspconfig.lua_ls.setup({
+            capabilities = capabilities,
+            settings = {
+              Lua = {
+                runtime = { version = "Lua 5.1" },
+                diagnostics = {
+                  globals = { "bit", "vim", "it", "describe", "before_each", "after_each" },
+                },
+              },
+            },
+          })
+        end,
+        ["pyright"] = function()
+          local lspconfig = require("lspconfig")
+          lspconfig.pyright.setup({
+            capabilities = capabilities,
+            settings = {
+              pyright = {
+                disableLanguageServices = false,
+                disableOrganizeImports = false,
+              },
+
+              python = {
+                analysis = {
+                  autoImportCompletions = true,
+                  autoSearchPaths = true,
+                  diagnosticMode = "workspace",
+                  typeCheckingMode = "off",
+                  useLibraryCodeForTypes = false,
+                },
+              },
+            },
+            configuration = {
+              reportIncompatibleVariableOverride = "none",
+            },
+          })
+        end,
+      },
+    })
+
+    local check_backspace = function()
+      local col = vim.fn.col(".") - 1
+      return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
+    end
+
+    -- local cmp_select = { behavior = cmp.SelectBehavior.Select }
+
+    cmp.setup({
+      snippet = {
+        expand = function(args)
+          luasnip.lsp_expand(args.body) -- For `luasnip` users.
+        end,
+      },
+
+      mapping = cmp.mapping.preset.insert({
+        ["<C-k>"] = cmp.mapping.select_prev_item(),
+        ["<C-j>"] = cmp.mapping.select_next_item(),
+        ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
+        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
+        ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+        ["<C-e>"] = cmp.mapping({
+          i = cmp.mapping.abort(),
+          c = cmp.mapping.close(),
+        }),
+        -- Accept currently selected item. If none selected, `select` first item.
+        -- Set `select` to `false` to only confirm explicitly selected items.
+        ["<CR>"] = cmp.mapping.confirm({ select = true }),
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          elseif luasnip.expandable() then
+            luasnip.expand()
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          elseif check_backspace() then
+            fallback()
+          else
+            fallback()
+          end
+        end, {
+          "i",
+          "s",
+        }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            fallback()
+          end
+        end, {
+          "i",
+          "s",
+        }),
+      }),
+      --        mapping = cmp.mapping.preset.insert({
+      --           ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+      --          ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+      --         ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+      --        ["<C-Space>"] = cmp.mapping.complete(),
+      --   }),
+      sources = cmp.config.sources({
+        { name = "nvim_lsp" },
+        { name = "luasnip" }, -- For luasnip users.
+        { name = "buffer" },
+        { name = "path" },
+      }),
+    })
+
+    local signs = {
+
+      { name = "DiagnosticSignError", text = "" },
+      { name = "DiagnosticSignWarn", text = "" },
+      { name = "DiagnosticSignHint", text = "" },
+      { name = "DiagnosticSignInfo", text = "" },
+    }
+
+    for _, sign in ipairs(signs) do
+      vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+    end
+
+    vim.diagnostic.config({
+
+      virtual_text = true, -- drosos disable virtual text
+      signs = {
+        active = signs,    -- show signs
+      },
+      update_in_insert = true,
+      underline = true,
+      severity_sort = true,
+      float = {
+        focusable = true,
+        style = "minimal",
+        border = "rounded",
+        source = "always",
+        header = "",
+        prefix = "",
+      },
+    })
+  end,
+}
