@@ -7,7 +7,7 @@ vim.keymap.set("n", "<C-h>", "<C-w><C-h>")
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>")
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>")
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>")
-vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>")
+-- vim.keymap.set("n", "<leader>\\", "<cmd>NvimTreeToggle<cr>")
 -- vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
 -- vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
 -- vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
@@ -51,10 +51,10 @@ vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", { desc = "Show L
 vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", { desc = " show lsp implementations" })
 vim.keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", { desc = " show lsp type definitions" })
 vim.keymap.set(
-  { "n", "v" },
-  "<leader>ca",
-  vim.lsp.buf.code_action,
-  { desc = " see available code actions, in visual mode will apply to selection" }
+	{ "n", "v" },
+	"<leader>ca",
+	vim.lsp.buf.code_action,
+	{ desc = " see available code actions, in visual mode will apply to selection" }
 )
 vim.keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", { desc = " show  diagnostics for file" })
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = " show diagnostics for line" })
@@ -68,10 +68,10 @@ vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", { desc = " show 
 vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", { desc = " show lsp implementations" })
 vim.keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", { desc = " show lsp type definitions" })
 vim.keymap.set(
-  { "n", "v" },
-  "<leader>ca",
-  vim.lsp.buf.code_action,
-  { desc = " see available code actions, in visual mode will apply to selection" }
+	{ "n", "v" },
+	"<leader>ca",
+	vim.lsp.buf.code_action,
+	{ desc = " see available code actions, in visual mode will apply to selection" }
 )
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = " smart rename" })
 vim.keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", { desc = " show  diagnostics for file" })
