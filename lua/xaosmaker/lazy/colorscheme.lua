@@ -1,5 +1,4 @@
-function ColorMyPencils(color)
-	color = color or "rose-pine-moon"
+function ColorMyPencils()
 	--vim.cmd.colorscheme(color)
 	vim.cmd([[colorscheme tokyonight]])
 
@@ -15,7 +14,7 @@ return {
 
 	config = function()
 		require("tokyonight").setup({
-			style = "darker",
+			style = "night",
 			transparent = true,
 			terminal_colors = true,
 			styles = {
