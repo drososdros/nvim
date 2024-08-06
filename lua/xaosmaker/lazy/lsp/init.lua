@@ -23,7 +23,9 @@ return {
 
 			{ name = "DiagnosticSignError", text = "" },
 			{ name = "DiagnosticSignWarn", text = "" },
-			{ name = "DiagnosticSignHint", text = "" },
+			{ name = "DiagnosticSignHint", text = "" },
+
+			-- hint =,""
 			{ name = "DiagnosticSignInfo", text = "" },
 		}
 
