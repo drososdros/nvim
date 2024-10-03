@@ -49,7 +49,7 @@ return {
 				"cssls",
 				"dockerls",
 				"html",
-				"tsserver",
+				-- "tsserver",
 				"pyright",
 				"bashls",
 				"jsonls",
