@@ -6,10 +6,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
-vim.api.nvim_create_autocmd("BufWritePre", {
-	desc = "auto short the tailwind functions",
-	group = vim.api.nvim_create_augroup("tailwind-short", { clear = true }),
-	callback = function()
-		vim.cmd("TailwindSort")
-	end,
-})
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+-- 	desc = "auto short the tailwind functions",
+-- 	group = vim.api.nvim_create_augroup("tailwind-short", { clear = true }),
+-- 	callback = function()
+-- 		vim.cmd("TailwindSort")
+-- 	end,
+-- })
