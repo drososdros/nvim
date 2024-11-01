@@ -81,3 +81,6 @@ vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = " jump to previous 
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = " jump to next diagnostic in buffer" })
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = " show documentation for what is under cursor" })
 vim.keymap.set("n", "<leader>rs", ":LspRestart<CR>", { desc = " mapping to restart lsp if necessary" })
+vim.keymap.set("n", "<leader>cf", ":ModuleCss<CR>", { desc = "create a new module.css file" })
+
+vim.keymap.set("n", "<leader>cs", ':lua require("hex2rgba").hex2rgba()<cr>', { noremap = true })
