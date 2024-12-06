@@ -7,6 +7,20 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 -- vim.api.nvim_create_autocmd("BufWritePre", {
+-- 	desc = "Auto format before writing the buffer for C and C++",
+-- 	group = vim.api.nvim_create_augroup("auto-format", { clear = true }),
+--
+-- 	callback = function()
+-- 		-- Check if LSP is attached and then call LSP formatting
+-- 		if vim.lsp.buf.server_ready() then
+-- 			vim.lsp.buf.format({ async = true })
+-- 		else
+-- 			-- Fallback to external formatters like `clang-format` or `prettier`
+-- 			vim.cmd("silent! !clang-format -i %") -- For C/C++
+-- 		end
+-- 	end,
+-- })
+-- vim.api.nvim_create_autocmd("BufWritePre", {
 -- 	desc = "auto short the tailwind functions",
 -- 	group = vim.api.nvim_create_augroup("tailwind-short", { clear = true }),
 -- 	callback = function()
@@ -34,4 +48,4 @@ vim.api.nvim_create_user_command("ModuleCss", function()
 	else
 		print("Failed to create file: " .. new_filename)
 	end
-end,{})
+end, {})

@@ -60,6 +60,7 @@ return {
 				"eslint",
 				-- "nginx_language_server",
 				"pylsp",
+				"clangd",
 				"hydra_lsp",
 			},
 			handlers = {
@@ -106,6 +107,13 @@ return {
 						},
 					})
 				end,
+				["clangd"] = function()
+					local lspconfig = require("lspconfig")
+					lspconfig.clangd.setup({
+						capabilities = capabilities,
+						cmd = { "clangd", "--background-index" },
+					})
+				end,
 			},
 		})
 
@@ -116,6 +124,7 @@ return {
 				"isort", -- python formatter
 				"black", -- python formatter
 				"eslint_d",
+				"clang-format",
 			},
 		})
 
