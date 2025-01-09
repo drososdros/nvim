@@ -4,7 +4,7 @@ return { -- Autoformat
 	cmd = { "ConformInfo" },
 	keys = {
 		{
-			"<leader>af",
+			"<leader>g",
 			function()
 				require("conform").format({ async = true, lsp_format = "fallback" })
 			end,
@@ -37,6 +37,7 @@ return { -- Autoformat
 			--
 			-- You can use 'stop_after_first' to run the first available formatter from the list
 			-- javascript = { "prettierd", "prettier", stop_after_first = true },
+			--C = { "clang-format" }, --"clangd",
 		},
 	},
 }

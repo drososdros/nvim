@@ -19,6 +19,8 @@ vim.opt.relativenumber = true
 
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
+-- make text dont wrap in line
+vim.opt.wrap = false
 
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
@@ -50,6 +52,9 @@ vim.opt.timeoutlen = 300
 -- Configure how new splits should be opened
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+
+-- colorcolumn show at 80 chars
+vim.opt.colorcolumn = "80"
 
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
