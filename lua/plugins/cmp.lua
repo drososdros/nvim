@@ -33,6 +33,7 @@ return { -- Autocompletion
 		--  into multiple repos for maintenance purposes.
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-path",
+		"Jezda1337/nvim-html-css",
 	},
 	config = function()
 		-- See `:help cmp`
