@@ -204,7 +204,24 @@ return {
 
 		-- You can add other tools here that you want Mason to install
 		-- for you, so that they are available from within Neovim.
-		local ensure_installed = vim.tbl_keys(servers or {})
+		local ensure_installed = vim.tbl_keys(servers or {
+			"lua_ls",
+			"cssls",
+			"dockerls",
+			"ts_ls",
+			"pyright",
+			"bashls",
+			"jsonls",
+			"yamlls",
+			"tailwindcss",
+			"bashls",
+			"docker_compose_language_service",
+			"eslint",
+			-- "nginx_language_server",
+			"pylsp",
+			"clangd",
+			"hydra_lsp",
+		})
 		vim.list_extend(ensure_installed, {
 			"stylua", -- Used to format Lua code
 		})
