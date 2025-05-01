@@ -19,6 +19,11 @@ vim.opt.relativenumber = true
 
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 2 -- the number of spaces inserted for each indentation
+vim.opt.expandtab = true
+vim.opt.smartindent = true
 -- make text dont wrap in line
 vim.opt.wrap = false
 

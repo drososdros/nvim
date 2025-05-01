@@ -209,6 +209,7 @@ return {
 			"cssls",
 			"dockerls",
 			"ts_ls",
+			"tsserver",
 			"pyright",
 			"bashls",
 			"jsonls",
