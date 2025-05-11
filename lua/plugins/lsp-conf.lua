@@ -219,6 +219,8 @@ return {
 			"docker_compose_language_service",
 			"eslint",
 			-- "nginx_language_server",
+			"emmet-language-server",
+			"emmet-ls",
 			"pylsp",
 			"clangd",
 			"hydra_lsp",
