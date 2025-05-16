@@ -32,6 +32,7 @@ vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower win
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 vim.keymap.set("n", "<C-up>", "<C-w><C-+>", { desc = "resize window height +" })
 vim.keymap.set("n", "<C-down>", "<C-w><C-->", { desc = "resize window height -" })
+vim.keymap.set("n", "<leader>cc", "<cmd>CccPick<CR>", { desc = "change color with ccc" })
 
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = " show diagnostics for line" })
 vim.keymap.set("n", "\\", "<cmd>NvimTreeToggle<CR>")

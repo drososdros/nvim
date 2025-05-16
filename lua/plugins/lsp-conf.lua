@@ -15,6 +15,28 @@ return {
 		"hrsh7th/cmp-nvim-lsp",
 	},
 	config = function()
+		local tools = {
+			"stylua", -- Used to format Lua code
+			"emmet-language-server",
+		}
+		local lsp_servers = {
+
+			"lua_ls",
+			"cssls",
+			"dockerls",
+			"ts_ls",
+			"pyright",
+			"bashls",
+			"jsonls",
+			"yamlls",
+			"tailwindcss",
+			"bashls",
+			"docker_compose_language_service",
+			"eslint",
+			"pylsp",
+			-- "clangd",
+			"hydra_lsp",
+		}
 		-- Brief aside: **What is LSP?**
 		--
 		-- LSP is an initialism you've probably heard, but might not understand what it is.
@@ -204,33 +226,13 @@ return {
 
 		-- You can add other tools here that you want Mason to install
 		-- for you, so that they are available from within Neovim.
-		local ensure_installed = vim.tbl_keys(servers or {
-			"lua_ls",
-			"cssls",
-			"dockerls",
-			"ts_ls",
-			"tsserver",
-			"pyright",
-			"bashls",
-			"jsonls",
-			"yamlls",
-			"tailwindcss",
-			"bashls",
-			"docker_compose_language_service",
-			"eslint",
-			-- "nginx_language_server",
-			"emmet-language-server",
-			"emmet-ls",
-			"pylsp",
-			"clangd",
-			"hydra_lsp",
-		})
-		vim.list_extend(ensure_installed, {
-			"stylua", -- Used to format Lua code
-		})
-		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+		local ensure_installed = vim.tbl_keys(servers)
+		vim.list_extend(ensure_installed, {})
+		require("mason-tool-installer").setup({ ensure_installed = vim.list_extend(vim.deepcopy(lsp_servers), tools) })
 
 		require("mason-lspconfig").setup({
+			ensure_installed = lsp_servers,
+			automatic_enable = true,
 			handlers = {
 				function(server_name)
 					local server = servers[server_name] or {}
